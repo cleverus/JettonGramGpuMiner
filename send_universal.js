@@ -104,6 +104,7 @@ console.log('Using GPU', gpu);
 console.log('Using timeout', timeout);
 const mySeed = process.env.SEED;
 const apiKey = process.env.apiKey;
+const walletTo = process.env.walletTo;
 const totalDiff = BigInt('115792089237277217110272752943501742914102634520085823245724998868298727686144');
 let bestGiver = { address: '', coins: 0 };
 function updateBestGivers(liteClient) {
@@ -219,10 +220,11 @@ function main() {
       const [seed, complexity, iterations] = yield getPowInfo(liteClient, core_1.Address.parse(giverAddress));
       const randomName = (yield (0, crypto_1.getSecureRandomBytes)(8)).toString('hex') + '.boc';
       const path = `bocs/${randomName}`;
-      const command = `${bin} -g ${gpu} -F 128 -t ${timeout} ${wallet.address.toString({
-        urlSafe: true,
-        bounceable: true,
-      })} ${seed} ${complexity} ${iterations} ${giverAddress} ${path}`;
+      // const command = `${bin} -g ${gpu} -F 128 -t ${timeout} ${wallet.address.toString({
+      //   urlSafe: true,
+      //   bounceable: true,
+      // })} ${seed} ${complexity} ${iterations} ${giverAddress} ${path}`;
+      const command = `${bin} -g ${gpu} -F 128 -t ${timeout} ${walletTo} ${seed} ${complexity} ${iterations} ${giverAddress} ${path}`;
       try {
         const output = (0, child_process_1.execSync)(command, { encoding: 'utf-8', stdio: 'pipe' }); // the default is 'buffer'
       } catch (e) {}
