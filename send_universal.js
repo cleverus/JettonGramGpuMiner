@@ -103,6 +103,7 @@ const timeout = (_b = args['--timeout']) !== null && _b !== void 0 ? _b : 5;
 console.log('Using GPU', gpu);
 console.log('Using timeout', timeout);
 const mySeed = process.env.SEED;
+const apiKey = process.env.apiKey;
 const totalDiff = BigInt('115792089237277217110272752943501742914102634520085823245724998868298727686144');
 let bestGiver = { address: '', coins: 0 };
 function updateBestGivers(liteClient) {
